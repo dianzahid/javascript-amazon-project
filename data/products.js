@@ -656,5 +656,14 @@ const products = [
       "apparel",
       "mens"
     ]
+  },{
+    image: 'images/products/Elden-Ring-PS5.webp',
+    name: 'Elden Ring - PlayStation 5',
+    rating: {
+      stars: 4.5,
+      count: 5084
+    },
+    priceCents: 5900
   }
 ];
+
