@@ -69,15 +69,20 @@ button.addEventListener(('click'), ()=>{
   });
 
   if(matchingItem) {
-    matchingItem.qunatity++;
+    matchingItem.quantity++;
   }
   else {
     cart.push({
       productId: productId,
-      qunatity: 1
+      quantity: 1
   });
   }
-console.log(cart)
-})
-})
+  let cartQuantity = 0;
+  cart.forEach((item)=>{
+    cartQuantity += item.quantity;
+  });
+  document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+});
+});
+
 
