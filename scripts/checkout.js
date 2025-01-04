@@ -1,5 +1,6 @@
 import {cart} from "../data/cart.js"
 import {products} from "../data/products.js"
+import {formatCurrency} from "./utils/money.js";
 
 let orderSummaryHTML = ''
 let itemQuantity = 0; 
@@ -69,7 +70,7 @@ const html = `
       ${matchingProduct.name}
       </div>
       <div class="product-price">
-      $${(matchingProduct.priceCents / 100).toFixed(2)}
+      $${formatCurrency(matchingProduct.priceCents)}
       </div>
       <div class="product-quantity">
         <span>
@@ -92,7 +93,7 @@ const html = `
       <div class="delivery-option">
         <input type="radio" checked
           class="delivery-option-input"
-          name="delivery-option-1">
+          name="delivery-option-${matchingProduct.id}">
         <div>
           <div class="delivery-option-date">
             Tuesday, June 21
@@ -105,7 +106,7 @@ const html = `
       <div class="delivery-option">
         <input type="radio"
           class="delivery-option-input"
-          name="delivery-option-1">
+          name="delivery-option-${matchingProduct.id}">
         <div>
           <div class="delivery-option-date">
             Wednesday, June 15
@@ -118,7 +119,7 @@ const html = `
       <div class="delivery-option">
         <input type="radio"
           class="delivery-option-input"
-          name="delivery-option-1">
+          name="delivery-option-${matchingProduct.id}">
         <div>
           <div class="delivery-option-date">
             Monday, June 13
@@ -131,13 +132,13 @@ const html = `
     </div>
   </div>
 </div>`
+
   
 orderSummaryHTML += html;
 document.querySelector('.js-order-summary').innerHTML = paymentsummaryHTML + orderSummaryHTML;
 
 itemQuantity += cartItem.quantity;
 
-console.log(itemQuantity);
 
   document.querySelector('.js-number-of-items').innerHTML = `${itemQuantity} items`
 
