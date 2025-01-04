@@ -15,6 +15,16 @@ const products = [
     ]
   },
   {
+    id: "eldenringps5-id12345",
+    image: 'images/products/Elden-Ring-PS5.webp',
+    name: 'Elden Ring - PlayStation 5',
+    rating: {
+      stars: 4.5,
+      count: 5084
+    },
+    priceCents: 5900
+  },
+  {
     id: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
     image: "images/products/intermediate-composite-basketball.jpg",
     name: "Intermediate Size Basketball",
@@ -656,14 +666,6 @@ const products = [
       "apparel",
       "mens"
     ]
-  },{
-    image: 'images/products/Elden-Ring-PS5.webp',
-    name: 'Elden Ring - PlayStation 5',
-    rating: {
-      stars: 4.5,
-      count: 5084
-    },
-    priceCents: 5900
   }
 ];
 
