@@ -1,3 +1,5 @@
+import {cart} from "../data/cart.js"
+
 let productsHTML =  '';
 
 products.forEach((product)=>{
@@ -41,7 +43,7 @@ productsHTML += `
 
               <div class="product-spacer"></div>
 
-              <div class="added-to-cart">
+              <div class="added-to-cart js-added-to-cart-notification-${product.id}">
                 <img src="images/icons/checkmark.png">
                 Added
               </div>
@@ -55,8 +57,12 @@ productsHTML += `
 
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
+
 document.querySelectorAll('.js-add-to-cart')
 .forEach((button)=>{
+
+let addedMessageTimeout;
+
 button.addEventListener(('click'), ()=>{
   const {productId} = button.dataset;
 
@@ -84,7 +90,19 @@ button.addEventListener(('click'), ()=>{
     cartQuantity += item.quantity;
   });
   document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+  
+  const addedElement = document.querySelector(`.js-added-to-cart-notification-${productId}`);
 
+  addedElement.classList.add('added-to-cart-notification-new')
+  
+  if(addedMessageTimeout){
+    clearTimeout(addedMessageTimeout);
+  }
+  
+  const timeoutID = setTimeout(()=>{
+    addedElement.classList.remove('added-to-cart-notification-new')
+  },2000);
+  addedMessageTimeout = timeoutID;
 });
 });
 
