@@ -3,16 +3,11 @@ import {products} from "../data/products.js"
 import {formatCurrency} from "./utils/money.js";
 
 let orderSummaryHTML = ''
-let itemQuantity = 0; 
 let totalPrice = 0;
+let itemQuantity = 0;
 
 
-cart.forEach((cartItem)=>{
- const productId = cartItem.productID;
-
- let matchingProduct; 
-
- const paymentsummaryHTML = `        
+const paymentsummaryHTML = `        
  
       <div class="payment-summary">
           <div class="payment-summary-title">
@@ -20,7 +15,7 @@ cart.forEach((cartItem)=>{
           </div>
 
           <div class="payment-summary-row">
-            <div>Items (${itemQuantity}):</div>
+            <div>Items (???):</div>
             <div class="payment-summary-money">$42.25</div>
           </div>
 
@@ -49,10 +44,17 @@ cart.forEach((cartItem)=>{
           </button>
         </div>`
 
+
+cart.forEach((cartItem)=>{
+ const productId = cartItem.productId;
+
+ let matchingProduct; 
+ 
  products.forEach((product)=>{
 
   if(product.id === productId){
 matchingProduct = product;
+
 
 const html = `   
 
@@ -137,12 +139,13 @@ const html = `
 orderSummaryHTML += html;
 document.querySelector('.js-order-summary').innerHTML = paymentsummaryHTML + orderSummaryHTML;
 
+
+
 itemQuantity += cartItem.quantity;
-
-
-  document.querySelector('.js-number-of-items').innerHTML = `${itemQuantity} items`
-
-  }
+console.log(itemQuantity);
+document.querySelector('.js-number-of-items').innerHTML = `${itemQuantity} items`
+}
+  
 });
 
 })
@@ -151,8 +154,14 @@ document.querySelectorAll('.js-delete-link').forEach((link)=>{
 link.addEventListener('click',()=>{
   const productId = link.dataset.productId
   removeFromCart(productId);
+  console.log(productId)
+  console.log(cart);
   const container = document.querySelector(`.js-cart-item-container-${productId}`)
   container.remove();
+  
 
 })
 })
+
+
+

@@ -1,10 +1,17 @@
-export let cart = [{
+export let cart = JSON.parse(localStorage.getItem('cart'))
+
+if(!cart){
+cart = [{
   productID: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
   quantity: 7
 },{
   productID: 'eldenringps5-id12345',
   quantity: 1
 }];
+}
+function saveToStorage(){
+  localStorage.setItem('cart', JSON.stringify(cart))
+};
 
 export function addToCart(productId){
 
@@ -28,7 +35,7 @@ if(productId === cartItem.productId) {
       quantity: Number(productQuantity.value)
   });
   }
-
+  saveToStorage();
 };
 
 export function removeFromCart(productId){
@@ -37,11 +44,12 @@ const newCart = []
 
 cart.forEach((cartItem)=>{
 
-if (cartItem.productID !== productId){
+if (cartItem.productId !== productId){
   newCart.push(cartItem);
 }
 
 })
 
 cart = newCart;
+saveToStorage();
 }
