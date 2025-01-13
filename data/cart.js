@@ -1,14 +1,17 @@
 export let cart = JSON.parse(localStorage.getItem('cart'))
 
-if(!cart){
+if(!cart || cart.length === 0 ){
 cart = [{
   productID: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
-  quantity: 7
+  quantity: 7,
+  deliveryOptionID: '1'
 },{
   productID: 'eldenringps5-id12345',
-  quantity: 1
+  quantity: 1,
+  deliveryOptionID: '2'
 }];
 }
+
 function saveToStorage(){
   localStorage.setItem('cart', JSON.stringify(cart))
 };
@@ -19,7 +22,7 @@ export function addToCart(productId){
   let matchingItem = '';
 
   const productQuantity = document.querySelector(`.js-quantity-select-${productId}`)
-  
+
   cart.forEach((cartItem)=>{
 if(productId === cartItem.productId) {
   matchingItem = cartItem;
@@ -32,7 +35,8 @@ if(productId === cartItem.productId) {
   else {
     cart.push({
       productId, 
-      quantity: Number(productQuantity.value)
+      quantity: Number(productQuantity.value),
+      deliveryOptionID: '1'
   });
   }
   saveToStorage();
@@ -52,4 +56,28 @@ if (cartItem.productId !== productId){
 
 cart = newCart;
 saveToStorage();
+}
+
+export function updateCartQuantity(){
+
+  // update the cart quantity at the top right of the page
+  let cartQuantity = 0;
+  cart.forEach((cartItem)=>{
+    cartQuantity += cartItem.quantity;
+  })
+  return cartQuantity;
+}
+
+export function updateQuantity(productId, newQuantity) {
+  let matchingItem;
+
+  cart.forEach((cartItem) => {
+    if (productId === cartItem.productId) {
+      matchingItem = cartItem;
+    }
+  });
+
+  matchingItem.quantity = newQuantity;
+
+  saveToStorage();
 }
