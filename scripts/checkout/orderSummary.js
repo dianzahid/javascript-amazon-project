@@ -128,6 +128,8 @@ export function renderOrderSummary(){
     const cartQuantity = updateCartQuantity()
     document.querySelector('.js-number-of-items').innerHTML = `${cartQuantity} items`
     document.querySelector('.js-items-order-summary').innerHTML = `items (${cartQuantity})`
+    renderPaymentSummary();
+
  
   })
   })
@@ -164,6 +166,7 @@ export function renderOrderSummary(){
       const {productId, deliveryOptionId} = element.dataset;
       updateDeliveryOption(productId,deliveryOptionId);
       renderOrderSummary();
+      renderPaymentSummary();
   });
 });
 }
