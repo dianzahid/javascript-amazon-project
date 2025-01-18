@@ -9,7 +9,7 @@ let orderSummaryHTML = ''
 let totalPrice = 0;
 
 
-const paymentsummaryHTML = `        
+  let paymentsummaryHTML = `        
  
       <div class="payment-summary">
           <div class="payment-summary-title">
