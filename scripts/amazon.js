@@ -100,6 +100,7 @@ button.addEventListener(('click'), ()=>{
   document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
 
   addedNotification(productId);
+  console.log(cart)
   
 });
 });
