@@ -2,7 +2,7 @@ import {cart, removeFromCart, updateQuantity, updateDeliveryOption, updateCartQu
 import {products, getProduct} from "../../data/products.js"
 import {formatCurrency} from "../utils/money.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js"
-import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js';
+import {deliveryOptions, getDeliveryOption, calculateDeliveryDate} from '../../data/deliveryOptions.js';
 import {renderPaymentSummary} from "./paymentSummary.js";
 import { renderCheckoutheader } from "../../styles/pages/checkout/checkoutHeader.js";
 
@@ -23,12 +23,8 @@ export function renderOrderSummary(){
 
   const deliveryOption = getDeliveryOption(deliveryOptionId);
 
-      const today = dayjs();
-      const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
+ const dateString = calculateDeliveryDate(deliveryOption);
 
-      const dateString = deliveryDate.format(
-        'dddd, MMMM D'
-      )
 
   let html = `   
 
@@ -75,28 +71,24 @@ export function renderOrderSummary(){
   orderSummaryHTML += html;
   document.querySelector('.js-order-summary').innerHTML = orderSummaryHTML;
 
-  })
+})
 
   function deliveryOptionsHTML(matchingProduct, cartItem) {
 
     let html = '';
 
-    deliveryOptions.forEach((deliveryOptions)=>{
-      const today = dayjs();
-      const deliveryDate = today.add(deliveryOptions.deliveryDays, 'days');
+    deliveryOptions.forEach((deliveryOption)=>{
 
-      const dateString = deliveryDate.format(
-        'dddd, MMMM D'
-      );
+      const dateString = calculateDeliveryDate(deliveryOption);
 
-      const priceString = deliveryOptions.priceCents === 0 ? 'FREE' : `$${formatCurrency(deliveryOptions.priceCents)} -`;
+      const priceString = deliveryOption.priceCents === 0 ? 'FREE' : `$${formatCurrency(deliveryOption.priceCents)} -`;
 
-      const isChecked = deliveryOptions.id === cartItem.deliveryOptionID;
+      const isChecked = deliveryOption.id === cartItem.deliveryOptionID;
 
       html +=
       `<div class="delivery-option js-delivery-option"
       data-product-id = "${matchingProduct.id}"
-      data-delivery-option-id = "${deliveryOptions.id}" >
+      data-delivery-option-id = "${deliveryOption.id}" >
           <input type="radio"
           ${isChecked ? 'checked': ''}
             class="delivery-option-input"
@@ -171,6 +163,7 @@ export function renderOrderSummary(){
       renderPaymentSummary();
   });
 });
+
 }
 
 renderOrderSummary();
