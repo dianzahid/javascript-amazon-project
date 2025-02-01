@@ -1,16 +1,22 @@
-export let cart = JSON.parse(localStorage.getItem('cart'))
+export let cart;
 
-if(!cart || cart.length === 0 ){
-cart = [{
-  productID: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
-  quantity: 7,
-  deliveryOptionID: '1'
-},{
-  productID: 'eldenringps5-id12345',
-  quantity: 1,
-  deliveryOptionID: '2'
-}];
-}
+loadFromStorage();
+
+export function loadFromStorage(){
+  cart = JSON.parse(localStorage.getItem('cart'))
+
+  if(!cart || cart.length === 0 ){
+  cart = [{
+    productID: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+    quantity: 7,
+    deliveryOptionID: '1'
+  },{
+    productID: 'eldenringps5-id12345',
+    quantity: 1,
+    deliveryOptionID: '2'
+  }];
+  }
+};
 
 function saveToStorage(){
   localStorage.setItem('cart', JSON.stringify(cart))
