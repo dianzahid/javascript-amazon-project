@@ -2,11 +2,10 @@ import formatCurrency from "../scripts/utils/money.js";
 
 export function getProduct(productId){
   let matchingProduct; 
-
   products.forEach((product)=>{
-
     if(product.id === productId){
   matchingProduct = product;
+  console.log(matchingProduct)
 }})
 
 return matchingProduct;
@@ -56,6 +55,38 @@ class Clothing extends Product{
   }
 
 } 
+
+/*
+export let products = [];
+
+export function loadProducts(func){
+
+
+  //new xml request object 
+  const xhr = new XMLHttpRequest();
+
+  //wait for load to display in console
+    xhr.addEventListener('load',()=>{
+
+    products = JSON.parse(xhr.response).map((productDetails)=>{
+      if(productDetails.type === 'clothing'){
+        return new Clothing(productDetails);
+      }
+    return new Product(productDetails);
+    });
+    console.log(products)
+
+    func();
+    })
+
+  //set up request (type,url)
+  xhr.open('GET','https://supersimplebackend.dev/products')
+  //send request
+  xhr.send();
+};
+
+*/
+
 
 export const products = [
   {
