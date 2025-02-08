@@ -6,12 +6,10 @@ import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 
 /*
 new Promise((resolve)=>{
-  console.log('start')
   loadProducts(()=>{
     resolve();
   });
 }).then(()=>{
-  console.log('next')
 })
 */
 
