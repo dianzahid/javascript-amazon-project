@@ -6,6 +6,8 @@ import {deliveryOptions, getDeliveryOption, calculateDeliveryDate} from '../../d
 import {renderPaymentSummary} from "./paymentSummary.js";
 import { renderCheckoutheader } from "../../styles/pages/checkout/checkoutHeader.js";
 
+
+
 export function renderOrderSummary(){
 
   renderCheckoutheader();
@@ -18,7 +20,7 @@ export function renderOrderSummary(){
   const productId = cartItem.productID;
 
   const matchingProduct = getProduct(productId); 
-    
+  
   const deliveryOptionId = cartItem.deliveryOptionID;
 
   const deliveryOption = getDeliveryOption(deliveryOptionId);

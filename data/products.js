@@ -5,7 +5,6 @@ export function getProduct(productId){
   products.forEach((product)=>{
     if(product.id === productId){
   matchingProduct = product;
-  console.log(matchingProduct)
 }})
 
 return matchingProduct;
@@ -69,6 +68,7 @@ export function loadProducts(func){
     xhr.addEventListener('load',()=>{
 
     products = JSON.parse(xhr.response).map((productDetails)=>{
+      console.log(productDetails)
       if(productDetails.type === 'clothing'){
         return new Clothing(productDetails);
       }
@@ -86,7 +86,6 @@ export function loadProducts(func){
 };
 
 */
-
 
 export const products = [
   {
